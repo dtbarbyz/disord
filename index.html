@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0d0b21;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 25px;
+            border: none;
+            font-size: 1em;
+        }
+
+        input {
+            width: 200px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .friend-list {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .friend-card {
+            background-color: #333;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        .friend-card button {
+            margin-top: 10px;
+            background-color: #007BFF;
+        }
+
+        .friend-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Friends App</h1>
+        <div id="auth">
+            <input type="text" id="username" placeholder="Enter your username">
+            <button id="login">Log In</button>
+        </div>
+        <div id="dashboard" style="display: none;">
+            <h2>Welcome, <span id="user-name"></span>!</h2>
+            <div class="friend-list" id="friend-list"></div>
+            <h3>Add a friend:</h3>
+            <input type="text" id="friend-name" placeholder="Friend's username">
+            <button id="add-friend">Add Friend</button>
+        </div>
+    </div>
+
+    <script>
+        let username = null;
+        const authSection = document.getElementById("auth");
+        const dashboardSection = document.getElementById("dashboard");
+        const userNameSpan = document.getElementById("user-name");
+        const friendList = document.getElementById("friend-list");
+
+        // Login simulation
+        document.getElementById("login").addEventListener("click", () => {
+            username = document.getElementById("username").value;
+            if (username) {
+                authSection.style.display = "none";
+                dashboardSection.style.display = "block";
+                userNameSpan.textContent = username;
+            }
+        });
+
+        // Add a friend simulation
+        document.getElementById("add-friend").addEventListener("click", () => {
+            const friendName = document.getElementById("friend-name").value;
+            if (friendName) {
+                const friendCard = document.createElement("div");
+                friendCard.className = "friend-card";
+                friendCard.innerHTML = `
+                    <p>${friendName}</p>
+                    <button>Message</button>
+                    <button>Call</button>
+                `;
+                friendList.appendChild(friendCard);
+                document.getElementById("friend-name").value = ""; // Clear input
+            }
+        });
+    </script>
+</body>
+</html>
